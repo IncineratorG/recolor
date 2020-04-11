@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>ui/components/main-coordinator/MainCoordinator.qml</file>
+        <file>ui/screens/test/Test.qml</file>
+        <file>ui/screens/recolor/RecolorScreen.qml</file>
+        <file>ui/components/recolor/SelectableImage.qml</file>
+        <file>ui/components/recolor/LeftActionsPanel.qml</file>
+        <file>ui/components/recolor/TargetColorWidget.qml</file>
+        <file>ui/components/recolor/NewColorWidget.qml</file>
+    </qresource>
+</RCC>
