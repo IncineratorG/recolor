@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <QImage>
 #include <QString>
+#include <QMap>
+#include <QPair>
 
 RecolorScreenController::RecolorScreenController() {
     auto stores = Stores::getInstance();

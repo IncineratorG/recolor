@@ -26,14 +26,14 @@ ColorTools::ColorTools()
 
 }
 
-QList<float> ColorTools::RGBtoLAB(int red, int green, int blue, QList<float> tristimulus) {
+QList<float> ColorTools::RGBtoLAB(int red, int green, int blue, QList<float> tristimulus) const {
     QList<float> xyz = RGBtoXYZ(red, green, blue);
     QList<float> lab = XYZtoLAB(xyz.at(0), xyz.at(1), xyz.at(2), tristimulus);
 
     return lab;
 }
 
-QList<float> ColorTools::RGBtoXYZ(int red, int green, int blue) {
+QList<float> ColorTools::RGBtoXYZ(int red, int green, int blue) const {
     QList<float> xyz;
 
     float r = red / 255.0f;
@@ -76,7 +76,7 @@ QList<float> ColorTools::RGBtoXYZ(int red, int green, int blue) {
     return xyz;
 }
 
-QList<float> ColorTools::XYZtoLAB(float x, float y, float z, QList<float> tristimulus) {
+QList<float> ColorTools::XYZtoLAB(float x, float y, float z, QList<float> tristimulus) const {
     QList<float> lab;
 
     x /= tristimulus.at(0);
@@ -116,7 +116,7 @@ QList<float> ColorTools::XYZtoLAB(float x, float y, float z, QList<float> tristi
  * 100	Colors are exact opposite
 */
 double ColorTools::deltaE(const float L1, const float a1, const float b1,
-                         const float L2, const float a2, const float b2) {
+                         const float L2, const float a2, const float b2) const {
     double Lmean = (L1 + L2) / 2.0; //ok
     double C1 =  sqrt(a1 * a1 + b1 * b1); //ok
     double C2 =  sqrt(a2 * a2 + b2 * b2); //ok
@@ -164,7 +164,7 @@ double ColorTools::deltaE(const float L1, const float a1, const float b1,
 }
 
 double ColorTools::deltaE_V2(const float L1, const float a1, const float b1,
-                             const float L2, const float a2, const float b2) {
+                             const float L2, const float a2, const float b2) const {
 
     /*
      * "For these and all other numerical/graphical 􏰀delta E00 values
@@ -295,10 +295,10 @@ double ColorTools::deltaE_V2(const float L1, const float a1, const float b1,
     return (deltaE);
 }
 
-double ColorTools::deg2Rad(const double deg) {
+double ColorTools::deg2Rad(const double deg) const {
     return (deg * (M_PI / 180.0));
 }
 
-double ColorTools::rad2Deg(const double rad) {
+double ColorTools::rad2Deg(const double rad) const {
     return ((180.0 / M_PI) * rad);
 }

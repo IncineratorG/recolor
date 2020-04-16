@@ -35,21 +35,21 @@ public:
     QList<float> CIE10_F11;
 
     QList<float> RGBtoLAB(int red, int green, int blue,
-                                 QList<float> tristimulus);
+                                 QList<float> tristimulus) const;
 
-    QList<float> RGBtoXYZ(int red, int green, int blue);
+    QList<float> RGBtoXYZ(int red, int green, int blue) const;
 
     QList<float> XYZtoLAB(float x, float y, float z,
-                                 QList<float> tristimulus);
+                                 QList<float> tristimulus) const;
 
     double deltaE(const float L1, const float a1, const float b1,
-                 const float L2, const float a2, const float b2);
+                 const float L2, const float a2, const float b2) const;
     double deltaE_V2(const float L1, const float a1, const float b1,
-                     const float L2, const float a2, const float b2);
+                     const float L2, const float a2, const float b2) const;
 
 private:
-    double deg2Rad(const double deg);
-    double rad2Deg(const double rad);
+    double deg2Rad(const double deg) const;
+    double rad2Deg(const double rad) const;
 };
 
 #endif // COLORTOOLS_H

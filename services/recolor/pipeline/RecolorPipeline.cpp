@@ -1,5 +1,4 @@
 #include "RecolorPipeline.h"
-#include "../helpers/ColorTools.h"
 
 #include <QDebug>
 #include <QThread>
@@ -185,23 +184,43 @@ const QList<QPoint> RecolorPipeline::getPointsToRecolor(const QImage& image,
                                                         targetColor.blue(),
                                                         colorTools.CIE2_F7);
 
+    QPoint initialPoint(targetPoint);
     QPoint currentPoint(targetPoint);
+
+    QSet<QPoint> visitedPoints;
+    QSet<QPoint> borderPoints;
+
     while (true) {
-        const QColor& currentColor = image.pixelColor(currentPoint);
+        const QPair<bool, QPoint>& nextPointData = getNextPoint(image,
+                                                                currentPoint,
+                                                                initialPoint,
+                                                                visitedPoints,
+                                                                borderPoints,
+                                                                targetLAB,
+                                                                maximumDeltaE,
+                                                                colorTools);
 
-        const QList<float> currentLAB = colorTools.RGBtoLAB(currentColor.red(),
-                                                            currentColor.green(),
-                                                            currentColor.blue(),
-                                                            colorTools.CIE2_F7);
-
-        const double deltaE = colorTools.deltaE(targetLAB.at(0), targetLAB.at(1), targetLAB.at(2),
-                                                currentLAB.at(0), currentLAB.at(1), currentLAB.at(2));
-
-        if (deltaE < maximumDeltaE) {
-            points.append(currentPoint);
+        if (!nextPointData.first) {
+            break;
         }
 
-        break;
+
+
+//        const QColor& currentColor = image.pixelColor(currentPoint);
+
+//        const QList<float> currentLAB = colorTools.RGBtoLAB(currentColor.red(),
+//                                                            currentColor.green(),
+//                                                            currentColor.blue(),
+//                                                            colorTools.CIE2_F7);
+
+//        const double deltaE = colorTools.deltaE(targetLAB.at(0), targetLAB.at(1), targetLAB.at(2),
+//                                                currentLAB.at(0), currentLAB.at(1), currentLAB.at(2));
+
+//        if (deltaE < maximumDeltaE) {
+//            points.append(currentPoint);
+//        }
+
+//        break;
     }
 
     return points;
@@ -209,7 +228,61 @@ const QList<QPoint> RecolorPipeline::getPointsToRecolor(const QImage& image,
 
 const QPair<bool, QPoint> RecolorPipeline::getNextPoint(const QImage& image,
                                                         const QPoint& currentPoint,
+                                                        const QPoint& initialPoint,
+                                                        const QSet<QPoint>& visitedPoints,
+                                                        QSet<QPoint>& borderPoints,
                                                         const QList<float>& targetPointLAB,
-                                                        const double maxDeltaE) const {
+                                                        const double maxDeltaE,
+                                                        const ColorTools& colorTools) const {
+    const int currentPointX = currentPoint.x();
+    const int currentPointY = currentPoint.y();
 
+    QPoint nextPoint(currentPointX + 1, currentPointY);
+
+    const QColor& nextPointColor = image.pixelColor(nextPoint);
+    if (nextPointColor.isValid() &&
+        !visitedPoints.contains(nextPoint) &&
+        !borderPoints.contains(nextPoint)) {
+        const QList<float>& nextPointLAB = colorTools.RGBtoLAB(nextPointColor.red(),
+                                                               nextPointColor.green(),
+                                                               nextPointColor.blue(),
+                                                               colorTools.CIE2_F7);
+        const double deltaE = colorTools.deltaE(targetPointLAB.at(0), targetPointLAB.at(1), targetPointLAB.at(2),
+                                                nextPointLAB.at(0), nextPointLAB.at(1), nextPointLAB.at(2));
+        if (deltaE < maxDeltaE) {
+            return qMakePair(true, nextPoint);
+        }
+    }
+
+    return qMakePair(false, QPoint());
 }
+//const QPair<bool, QPoint> RecolorPipeline::getNextPoint(const QImage& image,
+//                                                        const QPoint& currentPoint,
+//                                                        const QPoint& initialPoint,
+//                                                        const QSet<QPoint>& visitedPoints,
+//                                                        QSet<QPoint>& borderPoints,
+//                                                        const QList<float>& targetPointLAB,
+//                                                        const double maxDeltaE,
+//                                                        const ColorTools& colorTools) const {
+//    const int currentPointX = currentPoint.x();
+//    const int currentPointY = currentPoint.y();
+
+//    QPoint nextPoint(currentPointX + 1, currentPointY);
+
+//    const QColor& nextPointColor = image.pixelColor(nextPoint);
+//    if (nextPointColor.isValid() &&
+//        !visitedPoints.contains(nextPoint) &&
+//        !borderPoints.contains(nextPoint)) {
+//        const QList<float>& nextPointLAB = colorTools.RGBtoLAB(nextPointColor.red(),
+//                                                               nextPointColor.green(),
+//                                                               nextPointColor.blue(),
+//                                                               colorTools.CIE2_F7);
+//        const double deltaE = colorTools.deltaE(targetPointLAB.at(0), targetPointLAB.at(1), targetPointLAB.at(2),
+//                                                nextPointLAB.at(0), nextPointLAB.at(1), nextPointLAB.at(2));
+//        if (deltaE < maxDeltaE) {
+//            return qMakePair(true, nextPoint);
+//        }
+//    }
+
+//    return qMakePair(false, QPoint());
+//}
