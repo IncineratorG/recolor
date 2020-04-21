@@ -1,9 +1,10 @@
 import QtQuick 2.0
 import "../../screens/test"
 import "../../screens/recolor"
+import "../../screens/matrix"
 
 Item {
-    RecolorScreen {
+    MatrixScreen {
         anchors.fill: parent
     }
 }

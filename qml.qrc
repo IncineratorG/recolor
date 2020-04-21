@@ -9,5 +9,7 @@
         <file>ui/components/recolor/LeftActionsPanel.qml</file>
         <file>ui/components/recolor/TargetColorWidget.qml</file>
         <file>ui/components/recolor/NewColorWidget.qml</file>
+        <file>ui/screens/matrix/MatrixScreen.qml</file>
+        <file>ui/components/matrix/RightPanel.qml</file>
     </qresource>
 </RCC>

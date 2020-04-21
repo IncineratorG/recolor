@@ -51,7 +51,11 @@ SOURCES += \
     services/recolor/RecolorService.cpp \
     services/recolor/pipeline/RecolorPipeline.cpp \
     services/recolor/helpers/ColorTools.cpp \
-    stores/recolor/actions/SetTargetColorPointAction.cpp
+    stores/recolor/actions/SetTargetColorPointAction.cpp \
+    logic/screens/matrix/Matrix.cpp \
+    logic/screens/matrix/controllers/MatrixScreenController.cpp \
+    logic/screens/matrix/models/MatrixScreenModel.cpp \
+    common/data/simple-matrix/SimpleMatrix.cpp
 
 RESOURCES += qml.qrc
 
@@ -104,4 +108,8 @@ HEADERS += \
     services/recolor/RecolorService.h \
     services/recolor/pipeline/RecolorPipeline.h \
     services/recolor/helpers/ColorTools.h \
-    stores/recolor/actions/SetTargetColorPointAction.h
+    stores/recolor/actions/SetTargetColorPointAction.h \
+    logic/screens/matrix/Matrix.h \
+    logic/screens/matrix/controllers/MatrixScreenController.h \
+    logic/screens/matrix/models/MatrixScreenModel.h \
+    common/data/simple-matrix/SimpleMatrix.h
