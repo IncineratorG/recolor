@@ -1,5 +1,7 @@
 #include "SimpleMatrix.h"
 
+#include <random>
+
 #include <QDebug>
 
 SimpleMatrix::SimpleMatrix()
@@ -7,10 +9,31 @@ SimpleMatrix::SimpleMatrix()
 
 }
 
-SimpleMatrix::SimpleMatrix(const unsigned long rows, const unsigned long cols)
+SimpleMatrix::SimpleMatrix(const unsigned long rows, const unsigned long cols, bool randInit)
     : mRows(rows), mCols(cols) {
     std::vector<std::vector<double>> mat(mRows, std::vector<double>(mCols));
     mMat = mat;
+
+    if (randInit) {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_real_distribution<> dis(0.0, 1.0);
+
+        for (unsigned long i = 0; i < mRows; ++i) {
+            for (unsigned long j = 0; j < mCols; ++j) {
+                mMat[i][j] = dis(gen);
+            }
+        }
+    }
+}
+
+SimpleMatrix::SimpleMatrix(const SimpleMatrix& other)
+    : mRows(other.mRows), mCols(other.mCols), mMat(other.mMat) {
+
+}
+
+bool SimpleMatrix::valid() const {
+    return mRows != 0 || mCols != 0;
 }
 
 void SimpleMatrix::print() const {
@@ -52,11 +75,33 @@ double SimpleMatrix::get(const unsigned long row, const unsigned long col) const
 }
 
 SimpleMatrix SimpleMatrix::plus(const SimpleMatrix& other) const {
-    return SimpleMatrix();
+    if (mRows != other.mRows || mCols != other.mCols) {
+        return SimpleMatrix();
+    }
+
+    SimpleMatrix sum(mRows, mCols);
+    for (unsigned long i = 0; i < mRows; ++i) {
+        for (unsigned long j = 0; j < mCols; ++j) {
+            sum.set(i, j, mMat[i][j] + other.mMat[i][j]);
+        }
+    }
+
+    return sum;
 }
 
 SimpleMatrix SimpleMatrix::minus(const SimpleMatrix& other) const {
-    return SimpleMatrix();
+    if (mRows != other.mRows || mCols != other.mCols) {
+        return SimpleMatrix();
+    }
+
+    SimpleMatrix subtracted(mRows, mCols);
+    for (unsigned long i = 0; i < mRows; ++i) {
+        for (unsigned long j = 0; j < mCols; ++j) {
+            subtracted.set(i, j, mMat[i][j] - other.mMat[i][j]);
+        }
+    }
+
+    return subtracted;
 }
 
 SimpleMatrix SimpleMatrix::mul(const SimpleMatrix& other) const {
@@ -84,8 +129,30 @@ SimpleMatrix SimpleMatrix::mul(const SimpleMatrix& other) const {
     return result;
 }
 
+SimpleMatrix SimpleMatrix::elementMult(const SimpleMatrix& other) const {
+    if (mRows != other.mRows || mCols != other.mCols) {
+        return SimpleMatrix();
+    }
+
+    SimpleMatrix multiplied(mRows, mCols);
+    for (unsigned long i = 0; i < mRows; ++i) {
+        for (unsigned long j = 0; j < mCols; ++j) {
+            multiplied.set(i, j, mMat[i][j] * other.mMat[i][j]);
+        }
+    }
+
+    return multiplied;
+}
+
 SimpleMatrix SimpleMatrix::transpose() {
-    return SimpleMatrix();
+    SimpleMatrix transposed(mCols, mRows);
+    for (unsigned long i = 0; i < mCols; ++i) {
+        for (unsigned long j = 0; j < mRows; ++j) {
+            transposed.mMat[i][j] = mMat[j][i];
+        }
+    }
+
+    return transposed;
 }
 
 //QVector<double> SimpleMatrix::getColumnValues(const int col) const {

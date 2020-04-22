@@ -8,7 +8,10 @@ class SimpleMatrix
 {
 public:
     SimpleMatrix();
-    SimpleMatrix(const unsigned long rows, const unsigned long cols);
+    SimpleMatrix(const unsigned long rows, const unsigned long cols, bool randInit = false);
+    SimpleMatrix(const SimpleMatrix& other);
+
+    bool valid() const;
 
     void print() const;
 
@@ -21,6 +24,7 @@ public:
     SimpleMatrix plus(const SimpleMatrix& other) const;
     SimpleMatrix minus(const SimpleMatrix& other) const;
     SimpleMatrix mul(const SimpleMatrix& other) const;
+    SimpleMatrix elementMult(const SimpleMatrix& other) const;
 
     SimpleMatrix transpose();
 
