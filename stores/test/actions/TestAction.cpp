@@ -1,5 +1,8 @@
 #include "TestAction.h"
+
 #include "stores/test/TestActions.h"
+
+#include <QDebug>
 
 TestAction::TestAction() {
     mPayload = nullptr;
@@ -16,3 +19,4 @@ std::shared_ptr<Payload> TestAction::getPayload() {
 void TestAction::setPayload(std::shared_ptr<Payload> p) {
     mPayload = p;
 }
+

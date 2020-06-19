@@ -33,7 +33,6 @@ SOURCES += \
     stores/test/TestStore.cpp \
     stores/Stores.cpp \
     stores/test/TestActions.cpp \
-    stores/test/actions/TestAction.cpp \
     stores/test/TestState.cpp \
     logic/screens/recolor/Recolor.cpp \
     logic/screens/recolor/controllers/RecolorScreenController.cpp \
@@ -55,7 +54,23 @@ SOURCES += \
     logic/screens/matrix/Matrix.cpp \
     logic/screens/matrix/controllers/MatrixScreenController.cpp \
     logic/screens/matrix/models/MatrixScreenModel.cpp \
-    common/data/simple-matrix/SimpleMatrix.cpp
+    common/data/simple-matrix/SimpleMatrix.cpp \
+    common/data/neural-network/NN_1.cpp \
+    common/data/neural-network/activation-functions/sigmoid/Sigmoid.cpp \
+    common/data/neural-network/activation-functions/abstract/ActivationFunction.cpp \
+    logic/screens/java-server/JavaServer.cpp \
+    logic/screens/java-server/models/JavaServerScreenModel.cpp \
+    logic/screens/java-server/controllers/JavaServerScreenController.cpp \
+    services/java-server-client/JavaServerClientService.cpp \
+    stores/java-server-client/JSCStore.cpp \
+    stores/java-server-client/JSCState.cpp \
+    stores/java-server-client/JSCActions.cpp \
+    stores/test/actions/TestAction.cpp \
+    stores/java-server-client/actions/JSCTestAction.cpp \
+    stores/java-server-client/actions/StartJavaServerClientAction.cpp \
+    stores/java-server-client/actions/StopJavaServerClientAction.cpp \
+    stores/java-server-client/middleware/JSCMiddlewareReduce.cpp \
+    stores/java-server-client/middleware/JSCMiddlewareEffect.cpp
 
 RESOURCES += qml.qrc
 
@@ -90,7 +105,6 @@ HEADERS += \
     stores/test/TestStore.h \
     stores/Stores.h \
     stores/test/TestActions.h \
-    stores/test/actions/TestAction.h \
     stores/test/TestState.h \
     logic/screens/recolor/Recolor.h \
     logic/screens/recolor/controllers/RecolorScreenController.h \
@@ -112,4 +126,20 @@ HEADERS += \
     logic/screens/matrix/Matrix.h \
     logic/screens/matrix/controllers/MatrixScreenController.h \
     logic/screens/matrix/models/MatrixScreenModel.h \
-    common/data/simple-matrix/SimpleMatrix.h
+    common/data/simple-matrix/SimpleMatrix.h \
+    common/data/neural-network/NN_1.h \
+    common/data/neural-network/activation-functions/sigmoid/Sigmoid.h \
+    common/data/neural-network/activation-functions/abstract/ActivationFunction.h \
+    logic/screens/java-server/JavaServer.h \
+    logic/screens/java-server/models/JavaServerScreenModel.h \
+    logic/screens/java-server/controllers/JavaServerScreenController.h \
+    services/java-server-client/JavaServerClientService.h \
+    stores/java-server-client/JSCStore.h \
+    stores/java-server-client/JSCState.h \
+    stores/java-server-client/JSCActions.h \
+    stores/test/actions/TestAction.h \
+    stores/java-server-client/actions/JSCTestAction.h \
+    stores/java-server-client/actions/StartJavaServerClientAction.h \
+    stores/java-server-client/actions/StopJavaServerClientAction.h \
+    stores/java-server-client/middleware/JSCMiddlewareReduce.h \
+    stores/java-server-client/middleware/JSCMiddlewareEffect.h

@@ -4,6 +4,7 @@
 #include "logic/screens/test/Test.h"
 #include "logic/screens/recolor/Recolor.h"
 #include "logic/screens/matrix/Matrix.h"
+#include "logic/screens/java-server/JavaServer.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,6 +22,9 @@ int main(int argc, char *argv[])
 
     Matrix* matrixScreen = new Matrix();
     matrixScreen->registerScreen(engine.rootContext());
+
+    JavaServer* javaServerScreen = new JavaServer();
+    javaServerScreen->registerScreen(engine.rootContext());
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty()) {

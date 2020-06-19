@@ -7,6 +7,7 @@ Stores* Stores::mInstance = nullptr;
 Stores::Stores() {
     mTestStore = std::make_shared<TestStore>();
     mRecolorStore = std::make_shared<RecolorStore>();
+    mJSCStore = std::make_shared<JSCStore>();
 }
 
 Stores* Stores::getInstance() {
@@ -25,6 +26,10 @@ std::shared_ptr<Store> Stores::getStore(int type) const {
 
         case Recolor: {
             return mRecolorStore;
+        }
+
+        case JavaServerClient: {
+            return mJSCStore;
         }
     }
 

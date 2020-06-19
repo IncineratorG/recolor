@@ -11,5 +11,7 @@
         <file>ui/components/recolor/NewColorWidget.qml</file>
         <file>ui/screens/matrix/MatrixScreen.qml</file>
         <file>ui/components/matrix/RightPanel.qml</file>
+        <file>ui/screens/java-server/JavaServerScreen.qml</file>
+        <file>ui/components/java-server/RightPanel.qml</file>
     </qresource>
 </RCC>
