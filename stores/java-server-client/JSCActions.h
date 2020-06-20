@@ -9,6 +9,7 @@ public:
     static const int Test = 1;
     static const int StartJavaServerClient = 2;
     static const int StopJavaServerClient = 3;
+    static const int SendData = 4;
 
     JSCActions();
 

@@ -24,6 +24,17 @@ void JSCStore::effect(std::shared_ptr<Action> action) {
     switch (action->getType()) {
         case JSCActions::StartJavaServerClient: {
             mJSCEffect.startService(mJSCState, action, mJavaServerClientService);
+            break;
+        }
+
+        case JSCActions::StopJavaServerClient: {
+            mJSCEffect.stopService(mJSCState, action, mJavaServerClientService);
+            break;
+        }
+
+        case JSCActions::SendData: {
+            mJSCEffect.sendData(mJSCState, action, mJavaServerClientService);
+            break;
         }
 
         default: {

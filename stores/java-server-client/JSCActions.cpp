@@ -3,6 +3,7 @@
 #include "actions/JSCTestAction.h"
 #include "actions/StartJavaServerClientAction.h"
 #include "actions/StopJavaServerClientAction.h"
+#include "actions/SendDataAction.h"
 
 #include <QDebug>
 
@@ -22,6 +23,10 @@ std::shared_ptr<Action> JSCActions::getAction(int type) const {
 
         case StopJavaServerClient: {
             return std::make_shared<StopJavaServerClientAction>();
+        }
+
+        case SendData: {
+            return std::make_shared<SendDataAction>();
         }
 
         default: {

@@ -6,7 +6,7 @@ StopJavaServerClientAction::StopJavaServerClientAction() {
 }
 
 int StopJavaServerClientAction::getType() const {
-    return JSCActions::Test;
+    return JSCActions::StopJavaServerClient;
 }
 
 std::shared_ptr<Payload> StopJavaServerClientAction::getPayload() {
