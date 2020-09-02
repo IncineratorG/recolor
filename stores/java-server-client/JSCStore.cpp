@@ -37,6 +37,11 @@ void JSCStore::effect(std::shared_ptr<Action> action) {
             break;
         }
 
+        case JSCActions::RunLongRunningTask: {
+            mJSCEffect.runLongRunningTask(mJSCState, action, mJavaServerClientService);
+            break;
+        }
+
         default: {
 
         }

@@ -3,6 +3,7 @@
 
 #include "common/libs/service/Service.h"
 #include "bridge/Bridge.h";
+#include "actions/ServerActions.h"
 
 #include <QObject>
 #include <QTcpSocket>
@@ -18,11 +19,12 @@ public:
     void start();
     void stop();
     void send(const QString& data);
+    void runLongRunningTask();
 
 signals:
     void startBridge();
     void stopBridge();
-    void sendData(const QString& data);
+    void sendData(const QByteArray& data);
 
 private slots:
     void onDataReceived(const QString& data);
@@ -32,6 +34,8 @@ private:
     QThread mThread;
 
     Bridge* mBridge;
+
+    ServerActions mServerActions;
 };
 
 #endif // JAVASERVERCLIENTSERVICE_H

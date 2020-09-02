@@ -4,6 +4,7 @@
 #include "actions/StartJavaServerClientAction.h"
 #include "actions/StopJavaServerClientAction.h"
 #include "actions/SendDataAction.h"
+#include "actions/RunLongRunningTaskAction.h"
 
 #include <QDebug>
 
@@ -27,6 +28,10 @@ std::shared_ptr<Action> JSCActions::getAction(int type) const {
 
         case SendData: {
             return std::make_shared<SendDataAction>();
+        }
+
+        case RunLongRunningTask: {
+            return std::make_shared<RunLongRunningTaskAction>();
         }
 
         default: {

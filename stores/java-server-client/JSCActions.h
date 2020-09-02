@@ -10,6 +10,7 @@ public:
     static const int StartJavaServerClient = 2;
     static const int StopJavaServerClient = 3;
     static const int SendData = 4;
+    static const int RunLongRunningTask = 5;
 
     JSCActions();
 

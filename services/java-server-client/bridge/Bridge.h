@@ -20,7 +20,7 @@ public slots:
     void on();
     void off();
 
-    void send(const QString& data);
+    void send(const QByteArray& data);
 
 private slots:
     void onTimeout();
@@ -37,6 +37,8 @@ private:
     QTcpSocket* mSocket;
     QTimer* mTimer;
     int counter;
+
+    void sendJson();
 };
 
 #endif // BRIDGE_H

@@ -33,3 +33,9 @@ void JSCMiddlewareEffect::sendData(std::shared_ptr<JSCState> state,
         return;
     }
 }
+
+void JSCMiddlewareEffect::runLongRunningTask(std::shared_ptr<JSCState> state,
+                                   std::shared_ptr<Action> action,
+                                   std::shared_ptr<JavaServerClientService> service) {
+    service->runLongRunningTask();
+}

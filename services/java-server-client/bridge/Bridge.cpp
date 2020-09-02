@@ -1,4 +1,5 @@
 #include "Bridge.h"
+#include "../actions/ServerActions.h"
 
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -41,10 +42,12 @@ void Bridge::off() {
 
 //    mSocket->close();
 
-    QString s("bye\r\n");
-    QByteArray ba = s.toUtf8();
+//    QString s("bye\r\n");
+//    QByteArray ba = s.toUtf8();
 
-    mSocket->write(ba);
+    ServerActions serverActions;
+
+    mSocket->write(serverActions.getOffAction());
 
     bool result = mSocket->waitForBytesWritten();
     qDebug() << __PRETTY_FUNCTION__ << "->WRITE_RESULT: " << result;
@@ -53,17 +56,62 @@ void Bridge::off() {
     mSocket->disconnectFromHost();
 }
 
-void Bridge::send(const QString& data) {
-    qDebug() << __PRETTY_FUNCTION__ << "->DATA: " + data;
+void Bridge::send(const QByteArray& data) {
+    qDebug() << __PRETTY_FUNCTION__;
 
-    QString s("no_peace\r\n");
-    QByteArray ba = s.toUtf8();
+//    ServerActions serverActions;
+
+    mSocket->write(data);
+    mSocket->flush();
+
+////    QString s("MY_TEST_STRING\r\n");
+//    QString s("\"TYPE: FIRST_ACTION\"\r\n");
+//    QString ss("{\"a\":11,\"s\":\"string\",\"list\":[\"A\",\"B\",\"C\"]}\r\n");
+//    QByteArray ba = ss.toUtf8();
+
+//    mSocket->write(ba);
+//    mSocket->flush();
+
+//    mSocket->write("\r\n");
+
+//    bool result = mSocket->waitForBytesWritten();
+//    qDebug() << __PRETTY_FUNCTION__ << "->WRITE_RESULT_1: " << result;
+
+//    mSocket->write("\r\n");
+
+//    result = mSocket->waitForBytesWritten();
+//    qDebug() << __PRETTY_FUNCTION__ << "->WRITE_RESULT_2: " << result;
+}
+// ===
+// =====
+//void Bridge::send(const QString& data) {
+//    qDebug() << __PRETTY_FUNCTION__ << "->DATA: " + data;
+
+//    sendJson();
+//}
+
+void Bridge::sendJson() {
+//    QString ("{TYPE: FIRST_ACTION}");
+
+    QJsonObject object;
+    object.insert("\"TYPE\"", QJsonValue::fromVariant("\"FIRST_ACTION\""));
+
+    QJsonDocument doc(object);
+    QByteArray ba = doc.toBinaryData();
+
+    qDebug() << ba;
 
     mSocket->write(ba);
+    mSocket->flush();
 
-    bool result = mSocket->waitForBytesWritten();
-    qDebug() << __PRETTY_FUNCTION__ << "->WRITE_RESULT: " << result;
+    QString s("\r\n");
+    ba = s.toUtf8();
+
+    mSocket->write(ba);
+    mSocket->flush();
 }
+// =====
+// ===
 
 void Bridge::onTimeout() {
     qDebug() << __PRETTY_FUNCTION__;
@@ -84,30 +132,31 @@ void Bridge::bytesWritten(qint64 bytes) {
 
 void Bridge::readyRead() {
     qDebug() << __PRETTY_FUNCTION__;
-//    qDebug() << __PRETTY_FUNCTION__ << mSocket->readAll();
 
     QString data = mSocket->readAll();
-//    data = data.trimmed();
-    // ===
-    QJsonDocument doc = QJsonDocument::fromJson(data.toUtf8());
 
-//    qDebug() << __PRETTY_FUNCTION__ << doc.isNull();
+//    qDebug() << __PRETTY_FUNCTION__ << data;
+////    data = data.trimmed();
+//    // ===
+//    QJsonDocument doc = QJsonDocument::fromJson(data.toUtf8());
 
-    if (!doc.isNull()) {
-        if (doc.isObject()) {
-            QJsonObject obj = doc.object();
+////    qDebug() << __PRETTY_FUNCTION__ << doc.isNull();
 
-            QJsonValue val = obj.value("list");
-            QJsonArray arr = val.toArray();
-            for (int i = 0; i < arr.size(); ++i) {
-                QString v = arr.at(i).toString();
-                qDebug() << "ARR_VAL: " << v;
-            }
-        } else {
-            qDebug() << __PRETTY_FUNCTION__ << "->DOC_IS_NOT_OBJECT";
-        }
-    }
-    // ===
+//    if (!doc.isNull()) {
+//        if (doc.isObject()) {
+//            QJsonObject obj = doc.object();
+
+//            QJsonValue val = obj.value("list");
+//            QJsonArray arr = val.toArray();
+//            for (int i = 0; i < arr.size(); ++i) {
+//                QString v = arr.at(i).toString();
+//                qDebug() << "ARR_VAL: " << v;
+//            }
+//        } else {
+//            qDebug() << __PRETTY_FUNCTION__ << "->DOC_IS_NOT_OBJECT";
+//        }
+//    }
+//     ===
 
     emit received(data);
 }

@@ -1,6 +1,9 @@
 #include "JavaServerClientService.h"
 
 #include <QMap>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 #include <functional>
 
@@ -18,9 +21,9 @@ JavaServerClientService::JavaServerClientService() {
             mBridge,
             SLOT(off()));
     connect(this,
-            SIGNAL(sendData(const QString&)),
+            SIGNAL(sendData(const QByteArray&)),
             mBridge,
-            SLOT(send(const QString&)));
+            SLOT(send(const QByteArray&)));
     connect(mBridge,
             SIGNAL(received(const QString&)),
             this,
@@ -63,7 +66,7 @@ void JavaServerClientService::stop() {
 void JavaServerClientService::send(const QString& data) {
     qDebug() << __PRETTY_FUNCTION__;
 
-    emit sendData(data);
+    emit sendData(data.toUtf8());
 
 //    std::function<void(const QString&)> f1 = [] (const QString& s) {
 //        qDebug() << __PRETTY_FUNCTION__ << "->FROM_F1";
@@ -95,6 +98,37 @@ void JavaServerClientService::send(const QString& data) {
 //    qDebug() << "";
 }
 
+void JavaServerClientService::runLongRunningTask() {
+    qDebug() << __PRETTY_FUNCTION__;
+
+    emit sendData(mServerActions.runLongRunningTaskAction());
+}
+
 void JavaServerClientService::onDataReceived(const QString& data) {
     qDebug() << __PRETTY_FUNCTION__ << "->DATA: " + data;
+
+    QJsonDocument doc = QJsonDocument::fromJson(data.toUtf8());
+    if (doc.isNull()) {
+        qDebug() << __PRETTY_FUNCTION__ << "->DOC_IS_NULL";
+    } else {
+        qDebug() << __PRETTY_FUNCTION__ << "->DOC_NOT_NULL";
+
+        if (doc.isObject()) {
+            QJsonObject object = doc.object();
+
+            QJsonValue type = object.value("type");
+            QJsonValue values = object.value("values");
+
+            QString typeString = type.toString();
+
+            QJsonObject valuesObject = values.toObject();
+
+            QString aValue = valuesObject.value("a").toString();
+            QString bValue = valuesObject.value("b").toString();
+
+            qDebug() << __PRETTY_FUNCTION__ << ": " << typeString << aValue << bValue;
+        } else {
+            qDebug() << __PRETTY_FUNCTION__ << "DOC_NOT_OBJECT";
+        }
+    }
 }

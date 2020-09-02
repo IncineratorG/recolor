@@ -44,3 +44,13 @@ void JavaServerScreenController::sendData() {
 
     mJSCStore->dispatch(sendDataAction);
 }
+
+void JavaServerScreenController::runLongRunningServerTask() {
+    qDebug() << __PRETTY_FUNCTION__;
+
+    auto runLongRunningTaskAction = mJSCStore->
+            getActionsFactory()->
+            getAction(JSCActions::RunLongRunningTask);
+
+    mJSCStore->dispatch(runLongRunningTaskAction);
+}

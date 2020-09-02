@@ -23,6 +23,10 @@ public:
     void sendData(std::shared_ptr<JSCState> state,
                   std::shared_ptr<Action> action,
                   std::shared_ptr<JavaServerClientService> service);
+
+    void runLongRunningTask(std::shared_ptr<JSCState> state,
+                  std::shared_ptr<Action> action,
+                  std::shared_ptr<JavaServerClientService> service);
 };
 
 #endif // JSCMIDDLEWAREEFFECT_H

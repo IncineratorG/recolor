@@ -17,6 +17,7 @@ public:
     Q_INVOKABLE void startService();
     Q_INVOKABLE void stopService();
     Q_INVOKABLE void sendData();
+    Q_INVOKABLE void runLongRunningServerTask();
 
 private:
     std::shared_ptr<JSCStore> mJSCStore;

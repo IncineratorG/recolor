@@ -72,7 +72,9 @@ SOURCES += \
     stores/java-server-client/middleware/JSCMiddlewareReduce.cpp \
     stores/java-server-client/middleware/JSCMiddlewareEffect.cpp \
     stores/java-server-client/actions/SendDataAction.cpp \
-    services/java-server-client/bridge/Bridge.cpp
+    services/java-server-client/bridge/Bridge.cpp \
+    services/java-server-client/actions/ServerActions.cpp \
+    stores/java-server-client/actions/RunLongRunningTaskAction.cpp
 
 RESOURCES += qml.qrc
 
@@ -146,4 +148,6 @@ HEADERS += \
     stores/java-server-client/middleware/JSCMiddlewareReduce.h \
     stores/java-server-client/middleware/JSCMiddlewareEffect.h \
     stores/java-server-client/actions/SendDataAction.h \
-    services/java-server-client/bridge/Bridge.h
+    services/java-server-client/bridge/Bridge.h \
+    services/java-server-client/actions/ServerActions.h \
+    stores/java-server-client/actions/RunLongRunningTaskAction.h

@@ -18,7 +18,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.right: parent.right
 
-        width: 200
+        width: 250
 
         RightPanel {
             anchors.fill: parent

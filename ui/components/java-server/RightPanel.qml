@@ -11,7 +11,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        height: 200
+        height: 250
 
         Button {
             id: startButton
@@ -52,7 +52,7 @@ Rectangle {
         Button {
             id: sendButton
 
-            anchors.bottom: parent.bottom
+            anchors.bottom: longRunnigTaskButton.top
             anchors.left: parent.left
             anchors.right: parent.right
 
@@ -64,6 +64,24 @@ Rectangle {
 
             onClicked: {
                 JavaServerScreenController.sendData()
+            }
+        }
+
+        Button {
+            id: longRunnigTaskButton
+
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            anchors.margins: 4
+
+            height: 25
+
+            text: "Run Long Task"
+
+            onClicked: {
+                JavaServerScreenController.runLongRunningServerTask()
             }
         }
     }
