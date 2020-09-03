@@ -1,4 +1,5 @@
 #include "JavaServerClientService.h"
+#include "requests/RequestPayload.h"
 
 #include <QMap>
 #include <QJsonDocument>
@@ -66,7 +67,23 @@ void JavaServerClientService::stop() {
 void JavaServerClientService::send(const QString& data) {
     qDebug() << __PRETTY_FUNCTION__;
 
-    emit sendData(data.toUtf8());
+    // ===
+    QMap<QString, std::any> values;
+    values.insert("a", 1);
+    values.insert("b", 2);
+
+    QString serializedValues =
+            "\"a\":\"" + QString::number(std::any_cast<int>(values.value("a"))) + "\","
+            "\"b\":\"" + QString::number(std::any_cast<int>(values.value("a"))) + "\"" ;
+
+    RequestPayload payload(values, serializedValues);
+
+    QByteArray ba(payload.toByteArrayNoCRLF());
+
+    qDebug() << __PRETTY_FUNCTION__ << QString(ba);
+    // ===
+
+//    emit sendData(data.toUtf8());
 
 //    std::function<void(const QString&)> f1 = [] (const QString& s) {
 //        qDebug() << __PRETTY_FUNCTION__ << "->FROM_F1";

@@ -74,7 +74,10 @@ SOURCES += \
     stores/java-server-client/actions/SendDataAction.cpp \
     services/java-server-client/bridge/Bridge.cpp \
     services/java-server-client/actions/ServerActions.cpp \
-    stores/java-server-client/actions/RunLongRunningTaskAction.cpp
+    stores/java-server-client/actions/RunLongRunningTaskAction.cpp \
+    services/java-server-client/requests/ServerRequests.cpp \
+    services/java-server-client/requests/Request.cpp \
+    services/java-server-client/requests/RequestPayload.cpp
 
 RESOURCES += qml.qrc
 
@@ -150,4 +153,7 @@ HEADERS += \
     stores/java-server-client/actions/SendDataAction.h \
     services/java-server-client/bridge/Bridge.h \
     services/java-server-client/actions/ServerActions.h \
-    stores/java-server-client/actions/RunLongRunningTaskAction.h
+    stores/java-server-client/actions/RunLongRunningTaskAction.h \
+    services/java-server-client/requests/ServerRequests.h \
+    services/java-server-client/requests/Request.h \
+    services/java-server-client/requests/RequestPayload.h
