@@ -42,12 +42,12 @@ void Bridge::off() {
 
 //    mSocket->close();
 
-//    QString s("bye\r\n");
-//    QByteArray ba = s.toUtf8();
+    QString s("bye\r\n");
+    QByteArray ba = s.toUtf8();
 
-    ServerActions serverActions;
+//    ServerActions serverActions;
 
-    mSocket->write(serverActions.getOffAction());
+    mSocket->write(ba);
 
     bool result = mSocket->waitForBytesWritten();
     qDebug() << __PRETTY_FUNCTION__ << "->WRITE_RESULT: " << result;

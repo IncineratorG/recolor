@@ -19,6 +19,10 @@ RequestPayload::RequestPayload(const RequestPayload& other)
 
 }
 
+bool RequestPayload::isEmpty() const {
+    return mSerializedValues.isEmpty();
+}
+
 std::any RequestPayload::getValue(const QString& key) const {
     if (mValues.contains(key)) {
         return mValues.value(key);
@@ -28,6 +32,18 @@ std::any RequestPayload::getValue(const QString& key) const {
 }
 
 QByteArray RequestPayload::toByteArrayNoCRLF() const {
-    QString serializedPayload = "\"payload\":" + mSerializedValues;
+    QString payloadField = "\"payload\":";
+
+    QString openBrackets = "{";
+    QString closeBrackets = "}";
+    QString comma = ",";
+    QString doubleQuotes = "\"";
+
+    QString serializedPayload =
+            payloadField +
+            openBrackets +
+            mSerializedValues +
+            closeBrackets;
+
     return serializedPayload.toUtf8();
 }

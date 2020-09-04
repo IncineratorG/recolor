@@ -2,8 +2,9 @@
 #define JAVASERVERCLIENTSERVICE_H
 
 #include "common/libs/service/Service.h"
-#include "bridge/Bridge.h";
-#include "actions/ServerActions.h"
+#include "bridge/Bridge.h"
+#include "communication-manager/CommunicationManager.h"
+#include "requests/ServerRequests.h"
 
 #include <QObject>
 #include <QTcpSocket>
@@ -18,24 +19,29 @@ public:
 
     void start();
     void stop();
+
     void send(const QString& data);
     void runLongRunningTask();
 
-signals:
-    void startBridge();
-    void stopBridge();
-    void sendData(const QByteArray& data);
+//signals:
+//    void startBridge();
+//    void stopBridge();
+//    void sendData(const QByteArray& data);
 
-private slots:
-    void onDataReceived(const QString& data);
+//private slots:
+//    void onDataReceived(const QString& data);
 
 private:
+    CommunicationManager mCommunicationManager;
+
+    ServerRequests mServerRequests;
+
 //    QTcpSocket *socket;
-    QThread mThread;
+//    QThread mThread;
 
-    Bridge* mBridge;
+//    Bridge* mBridge;
 
-    ServerActions mServerActions;
+//    ServerActions mServerActions;
 };
 
 #endif // JAVASERVERCLIENTSERVICE_H

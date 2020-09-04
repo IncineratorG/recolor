@@ -17,6 +17,8 @@ public:
                    const QString& serializedValues);
     RequestPayload(const RequestPayload& other);
 
+    bool isEmpty() const;
+
     std::any getValue(const QString& key) const;
 
     QByteArray toByteArrayNoCRLF() const;

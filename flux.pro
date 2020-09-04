@@ -77,7 +77,10 @@ SOURCES += \
     stores/java-server-client/actions/RunLongRunningTaskAction.cpp \
     services/java-server-client/requests/ServerRequests.cpp \
     services/java-server-client/requests/Request.cpp \
-    services/java-server-client/requests/RequestPayload.cpp
+    services/java-server-client/requests/RequestPayload.cpp \
+    services/java-server-client/communication-manager/CommunicationManager.cpp \
+    services/java-server-client/server-messages/ServerMessageParser.cpp \
+    services/java-server-client/server-messages/ServerMessage.cpp
 
 RESOURCES += qml.qrc
 
@@ -156,4 +159,7 @@ HEADERS += \
     stores/java-server-client/actions/RunLongRunningTaskAction.h \
     services/java-server-client/requests/ServerRequests.h \
     services/java-server-client/requests/Request.h \
-    services/java-server-client/requests/RequestPayload.h
+    services/java-server-client/requests/RequestPayload.h \
+    services/java-server-client/communication-manager/CommunicationManager.h \
+    services/java-server-client/server-messages/ServerMessageParser.h \
+    services/java-server-client/server-messages/ServerMessage.h
