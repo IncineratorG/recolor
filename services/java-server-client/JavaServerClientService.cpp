@@ -11,8 +11,8 @@
 #include <functional>
 
 JavaServerClientService::JavaServerClientService() {
-    mCommunicationManager.onIncomingMessage([] (ServerMessage) {
-        qDebug() << __PRETTY_FUNCTION__;
+    mCommunicationManager.onIncomingMessage([] (ServerMessage serverMessage) {
+        qDebug() << __PRETTY_FUNCTION__ << "->" + serverMessage.getType() << " - " << serverMessage.getRequestUuid();
     });
 }
 

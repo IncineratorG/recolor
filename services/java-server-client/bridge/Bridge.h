@@ -14,7 +14,6 @@ class Bridge : public QObject
 
 public:
     explicit Bridge();
-//    ~Bridge();
 
 public slots:
     void on();
@@ -37,8 +36,6 @@ private:
     QTcpSocket* mSocket;
     QTimer* mTimer;
     int counter;
-
-    void sendJson();
 };
 
 #endif // BRIDGE_H

@@ -60,6 +60,8 @@ void CommunicationManager::onDataReceived(const QString& data) {
     qDebug() << __PRETTY_FUNCTION__ << data;
 
     ServerMessage serverMessage = mServerMessageParser.parse(data);
+
+    notifyMessageConsumers(serverMessage);
 }
 
 void CommunicationManager::notifyMessageConsumers(const ServerMessage& serverMessage) {

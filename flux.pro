@@ -80,7 +80,8 @@ SOURCES += \
     services/java-server-client/requests/RequestPayload.cpp \
     services/java-server-client/communication-manager/CommunicationManager.cpp \
     services/java-server-client/server-messages/ServerMessageParser.cpp \
-    services/java-server-client/server-messages/ServerMessage.cpp
+    services/java-server-client/server-messages/ServerMessage.cpp \
+    services/java-server-client/server-messages/ServerMessageTypes.cpp
 
 RESOURCES += qml.qrc
 
@@ -162,4 +163,5 @@ HEADERS += \
     services/java-server-client/requests/RequestPayload.h \
     services/java-server-client/communication-manager/CommunicationManager.h \
     services/java-server-client/server-messages/ServerMessageParser.h \
-    services/java-server-client/server-messages/ServerMessage.h
+    services/java-server-client/server-messages/ServerMessage.h \
+    services/java-server-client/server-messages/ServerMessageTypes.h

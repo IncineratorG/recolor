@@ -11,6 +11,10 @@ public:
     ServerMessageParser();
 
     ServerMessage parse(const QString& data);
+
+private:
+    QString TYPE_FIELD;
+    QString REQUEST_UUID_FIELD;
 };
 
 #endif // SERVERMESSAGEPARSER_H
